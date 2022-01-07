@@ -15,6 +15,7 @@ The plugin includes the Plausible tracking script. It supports using a custom do
   - [Options](#options)
   - [Pageview events](#pageview-events)
   - [Triggering custom events](#triggering-custom-events)
+  - [Outbound link click tracking](#outbound-link-click-tracking)
 - [Changelog](#changelog)
 - [License](#license)
 
@@ -65,11 +66,12 @@ _NOTE: By default, this plugin only generates output when run in production mode
 
 ### Options
 
-| Option         | Explanation                                            |
-| -------------- | ------------------------------------------------------ |
-| `domain`       | The domain configured in Plausible (required)          |
-| `customDomain` | Custom domain (if configured in Plausible's dashboard) |
-| `excludePaths` | Array of pathnames where page views will not be sent   |
+| Option                 | Explanation                                            |
+| -----------------------| ------------------------------------------------------ |
+| `domain`               | The domain configured in Plausible (required)          |
+| `customDomain`         | Custom domain (if configured in Plausible's dashboard) |
+| `excludePaths`         | Array of pathnames where page views will not be sent   |
+| `outboundLinkTracking` | Boolean to enable outbound link tracking               |
 
 ### Pageview events
 
@@ -88,6 +90,26 @@ window.plausible('Signup', {
 The event name can be anything. The second argument is an object with options. The only supported option is `callback` that is called once the event has been sent.
 
 _NOTE: Custom events will not show up right away. You have to configure a goal in your Plausible dashboard_.
+
+### Outbound link click tracking
+
+To enable [Outbound link click tracking](https://plausible.io/docs/outbound-link-click-tracking), set the `outboundLinkTracking` option to `true` in the plugin configuration. This option is not valid if you are using a custom domain.
+
+```javascript
+   // In your gatsby-config.js
+   module.exports = {
+     plugins: [
+       // The only required option is the domain
+       {
+         resolve: `gatsby-plugin-plausible`,
+         options: {
+           domain: `aquil.io`,
+           outboundLinkTracking: true
+         },
+       },
+     ],
+   };
+```
 
 ## Changelog
 
